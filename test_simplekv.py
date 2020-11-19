@@ -1,3 +1,7 @@
+"""
+Test SimpleKV Core Utils
+"""
+
 import unittest
 
 from simplekv import SimpleKV
@@ -19,6 +23,15 @@ class TestSimpleKV(unittest.TestCase):
     def test_simplekv_except(self):
         with self.assertRaises(Exception) as raisetest:
             self.simple_kv_store.put(1/0, 'hi') # HAHA...
+
+    def test_simplekv_exists(self):
+        self.assertTrue(self.simple_kv_store.exists('hello'))
+
+    def test_simplekv_notexists(self):
+        self.assertFalse(self.simple_kv_store.exists('nothello'))
+
+    def test_simplekv_keynotfound(self):
+        self.assertFalse(self.simple_kv_store.get('nothello'))
 
 
 if __name__ == "__main__":
