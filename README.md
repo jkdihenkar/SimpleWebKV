@@ -21,3 +21,11 @@ From another terminal - test the project is running fine.
 $ curl -d '{"arg1":"val1"}' -XPUT http://localhost:5000/put/hello 
 {"result":"success"}
 ```
+
+Description of the Contents of the Code files:
+
+* `simplekv.py` : core KV store functionalities
+* `simplekv_server.py` : flask kvstore service
+* `simplekv_cli_client.py` : CLI that interacts with the flask store service
+* `test_simplekv_server.py` : Tests for kvstore web service
+* `test_simplekv.py` : Test for core kv store utils
