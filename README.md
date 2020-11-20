@@ -45,5 +45,40 @@ You will start seeing events of the "curl -N watch" terminal.
 * `test_simplekv_server.py` : Tests for kvstore web service
 * `test_simplekv.py` : Test for core kv store utils
 
-## TODOs
-* Complete the Python CLI Tool Feature GET SET WATCH
+## Simple CLI Client Usgaes
+
+Connect to the running container with - 
+
+```
+docker exec -it f59dc4e /bin/bash
+```
+
+And test out the CLI - 
+
+```
+
+# PUT
+$ python simplekv_cli_client.py put  hello 456
+success
+
+# GET
+$ python simplekv_cli_client.py get hello
+456
+
+# WATCH
+$ python simplekv_cli_client.py watch
+PUT :: INIT STORE cli_store
+PUT :: Set hello = 456 in cli_store
+...
+...
+
+# Unsupported command
+$ python simplekv_cli_client.py set hello 456
+ERROR: Cannot find key: set
+Usage: simplekv_cli_client.py <command>
+  available commands:    get | put | watch
+
+For detailed information on this command, run:
+  simplekv_cli_client.py --help
+
+```
