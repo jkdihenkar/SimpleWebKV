@@ -1,8 +1,8 @@
-resources:
-  - ./../../base
+# resources:
+#   - ./../../base
 
 patches:
   - target:
       kind: Deployment
       name: simplewebkv
-    path: patches/resources.yml
+    path: patches/resources.yaml

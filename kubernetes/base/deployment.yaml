@@ -21,7 +21,7 @@ spec:
         name: simplewebkv
         imagePullPolicy: Always
         ports:
-          - containerPort: 8991
+          - containerPort: 5000
             name: http
         command: ["python"]
         args:  ["./simplekv_server.py"]
@@ -34,5 +34,11 @@ metadata:
     app: simplewebkv
     manifest_type: svc
 spec:
+  type: NodePort
   selector:
     app: simplewebkv
+  ports:
+    - port: 8991
+      name: simplewebkv
+      targetPort: 5000
+      

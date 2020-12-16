@@ -1,5 +1,7 @@
 FROM python:3.9.0
 
+EXPOSE 5000
+
 COPY ./*.py ./app/
 COPY ./requirements.txt ./app/
 

@@ -32,10 +32,13 @@ docker_run:
 	@docker build -t simplewebkv .
 	@docker run -d -p 127.0.0.1:5000:5000 simplewebkv
 
+# assumes docker login
 docker_build:
+	@docker build --rm -t jkdihenkar/simplewebkv:${COMMIT} .
 	@docker build --rm -t jkdihenkar/simplewebkv .
 
 docker_push:
+	@docker push docker.io/jkdihenkar/simplewebkv:${COMMIT}
 	@docker push docker.io/jkdihenkar/simplewebkv:latest
 
 check_skaffold:

@@ -18,15 +18,55 @@ make kube_deploy
 Check the deployment:
 
 ```
+[jay@localhost SimpleWebKV]$ make kube_deploy
+Generating tags...
+ - jkdihenkar/simplewebkv -> jkdihenkar/simplewebkv:e21fc7a-dirty
+Checking cache...
+ - jkdihenkar/simplewebkv: Not found. Building
+Found [minikube] context, using local docker daemon.
+Building [jkdihenkar/simplewebkv]...
+Sending build context to Docker daemon  13.82kB
+Step 1/7 : FROM python:3.9.0
+ ---> 0affb4652fc0
+Step 2/7 : EXPOSE 5000
+...
+...
+Successfully tagged jkdihenkar/simplewebkv:e21fc7a-dirty
+Tags used in deployment:
+ - jkdihenkar/simplewebkv -> jkdihenkar/simplewebkv:ad46245b9c2ec65df1ecf543cc2ae8c4dcf33bb9e80ffb94fffb84091d5cb557
+Starting deploy...
+WARN[0018] image [jkdihenkar/simplewebkv] is not used by the deployment 
+ - service/simplewebkv configured
+ - deployment.apps/simplewebkv configured
+Waiting for deployments to stabilize...
+ - test-ci:deployment/simplewebkv: creating container simplewebkv
+    - test-ci:pod/simplewebkv-7959c9cdc6-j6qbj: creating container simplewebkv
+ - test-ci:deployment/simplewebkv is ready.
+Deployments stabilized in 5.661649676s
+You can also run [skaffold run --tail] to get the logs
 
 ```
 
-From another terminal - test the project is running fine.
+Get the service from Minikube or your Kube Cluster:
 
 ```
-$ curl -d '{"arg1":"val1"}' -XPUT http://localhost:5000/put/hello 
+$ kubectl -n test-ci get service -o wide
+NAME          TYPE       CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE   SELECTOR
+simplewebkv   NodePort   10.98.155.85   <none>        8991:32444/TCP   88m   app=simplewebkv
+
+$ minikube service simplewebkv --url -n test-ci
+http://192.168.49.2:32444
+
+```
+
+Simple test the project is running fine.
+
+```
+$ curl -d '{"arg1":"val1"}' -XPUT http://192.168.49.2:32444/put/hello  
 {"result":"success"}
 ```
+
+=== ... note: readme to update after this.... ===
 
 ### Testing the Watch Feature
 
