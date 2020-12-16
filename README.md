@@ -4,15 +4,21 @@ A simple web KV Store in Flask with GET SET and WATCH
 
 # Running the Project
 
-**PRE-REQS**: Have docker installed on the system setup and working fine.
+**PRE-REQS**: Have docker installed on the system setup and working fine. This project uses makefile so ensure that make utils are installed. 
+
+Also ensure that you have kustomize, skaffold and minikube installed locally.
 
 
 ```bash
 git clone https://github.com/jkdihenkar/SimpleWebKV.git
 cd SimpleWebKV
-docker build -t simplekv .
-docker run -d -p 127.0.0.1:5000:5000 simplekv
-docker logs -f <container-id>
+make kube_deploy
+```
+
+Check the deployment:
+
+```
+
 ```
 
 From another terminal - test the project is running fine.

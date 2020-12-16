@@ -1,0 +1,38 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simplewebkv
+  labels:
+    app: simplewebkv
+    manifest_type: api
+spec:
+  selector:
+    matchLabels:
+      app: simplewebkv
+  template:
+    metadata:
+      name: simplewebkv
+      labels:
+        app: simplewebkv
+    spec:
+      containers:
+      - image: docker.io/jkdihenkar/simplewebkv
+        name: simplewebkv
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 8991
+            name: http
+        command: ["python"]
+        args:  ["./simplekv_server.py"]
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: simplewebkv
+  labels:
+    app: simplewebkv
+    manifest_type: svc
+spec:
+  selector:
+    app: simplewebkv
