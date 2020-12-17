@@ -1,7 +1,7 @@
 pipeline {
   agent {
-    docker {
-      image 'python:3.9.0'
+    dockerfile {
+      filename 'Dockerfile'
     }
 
   }
