@@ -14,5 +14,5 @@ spec:
       workingDir: /workspace/repo/
       command: ["make"]
       args: [
-        "dotests"
+        "dotest"
       ]

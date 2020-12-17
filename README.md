@@ -66,19 +66,17 @@ $ curl -d '{"arg1":"val1"}' -XPUT http://192.168.49.2:32444/put/hello
 {"result":"success"}
 ```
 
-=== ... note: readme to update after this.... ===
-
 ### Testing the Watch Feature
 
 Once the app is running - Open a new terminal and run - 
 ```
-curl -N http://localhost:5000/watch
+curl -N http://192.168.49.2:32444/watch
 ```
 
 Now do some operations from another terminal window - 
 
 ```
-curl -d '{"arg1":"val1"}' -XPUT http://localhost:5000/put/hello 
+curl -d '{"arg1":"val1"}' -XPUT http://192.168.49.2:32444/put/hello
 ```
 
 You will start seeing events of the "curl -N watch" terminal.
