@@ -1,0 +1,24 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: run-tests
+  # follows DNS-1123 names so "_" is invalid
+spec:
+  resources:
+    inputs:
+      - name: repo
+        type: git
+  steps:
+    - name: install-reqs-and-run-tests
+      image: python:3.9.0
+      workingDir: /workspace/repo/
+      command: ["pip"]
+      args: [
+        "install", 
+        "--user", 
+        "-r", 
+        "requirements.txt",
+        "&&",
+        "pytest",
+        "--junitxml=test-reports/junit.xml"
+      ]

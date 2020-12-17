@@ -25,7 +25,8 @@ showval:
 	@echo BRANCH_COMMIT_IMAGE_NAME: ${BRANCH_COMMIT_IMAGE_NAME}
 
 dotest: ## run test cases
-	pytest
+	@pip install --user -r requirements.txt
+	@pytest --junitxml=test-reports/junit.xml
 
 
 docker_run:
