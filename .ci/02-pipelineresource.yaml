@@ -8,7 +8,7 @@ spec:
     - name: url
       value: https://github.com/jkdihenkar/SimpleWebKV
     - name: revision
-      value: main
+      value: make_k8s_native
 
 # The git resource type will use git to clone the repo 
 # into the /workspace/$input_name directory everytime 

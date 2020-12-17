@@ -12,13 +12,7 @@ spec:
     - name: install-reqs-and-run-tests
       image: python:3.9.0
       workingDir: /workspace/repo/
-      command: ["pip"]
+      command: ["make"]
       args: [
-        "install", 
-        "--user", 
-        "-r", 
-        "requirements.txt",
-        "&&",
-        "pytest",
-        "--junitxml=test-reports/junit.xml"
+        "dotests"
       ]
