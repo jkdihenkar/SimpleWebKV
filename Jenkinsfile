@@ -1,16 +1,18 @@
 pipeline {
-  agent {
-    dockerfile {
-      filename 'Dockerfile'
-    }
-
-  }
+  agent any
   stages {
-    stage('test') {
+    stage('build-test') {
       steps {
         echo 'Helloworld!'
-        sh 'pytest'
+        sh 'make docker_build'
         echo 'EndPipeline.'
+      }
+    }
+    stage('deploy') {
+      steps {
+        echo 'Begin Deploy'
+        sh 'make skaffold_run'
+        echo 'Complete.'
       }
     }
   }
