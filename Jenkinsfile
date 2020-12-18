@@ -16,10 +16,10 @@ pipeline {
         echo 'EndPipeline.'
       }
     }
-    stage('deploy') {
+    stage('check_skaffold-deploy') {
       steps {
         echo 'Begin Deploy'
-        sh 'make skaffold_run'
+        sh 'skaffold version'
         echo 'Complete.'
       }
     }
