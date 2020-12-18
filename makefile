@@ -7,7 +7,7 @@ HOST_UID_GID := $(shell id -u):$(shell id -g)  # To run containers with current 
 
 ENV_DOCKER_DOMAIN ?= docker.io
 ENV_KUBE_CLUSTER ?= stage
-ENV_KUBE_NAMESPACE ?= test-ci
+ENV_KUBE_NAMESPACE ?= mft-mft-jd001
 
 KUBE_APP_NAME := simplewebkv
 
