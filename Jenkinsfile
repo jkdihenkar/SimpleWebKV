@@ -20,6 +20,7 @@ pipeline {
       steps {
         echo 'Begin Deploy'
         sh 'skaffold version'
+        sh 'make kube_deploy'
         echo 'Complete.'
       }
     }
