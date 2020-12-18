@@ -1,22 +1,7 @@
-apiVersion: skaffold/v2beta10
+apiVersion: skaffold/v1beta11
 kind: Config
-metadata:
-  name: simplewebkv
 build:
   artifacts:
     - image: jkdihenkar/simplewebkv
 deploy:
-  kustomize:
-    paths:
-      - kubernetes
-profiles:
-  - name: base
-    deploy:
-      kustomize:
-        paths:
-          - kubernetes/base
-  - name: stage
-    deploy:
-      kustomize:
-        paths:
-          - kubernetes/overlays/stage
+  kustomize: {}
