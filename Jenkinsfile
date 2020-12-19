@@ -31,9 +31,11 @@ pipeline {
      }
 
     stage('clean-up-stage') {
-      withKubeConfig([credentialsId: 'stage-kubeconfig']) {
-        echo "Cleaning up the mft namespace"
-        sh 'mft env delete --namespace mft-${MFT_NAMESPACE} || true'
+      steps {
+        withKubeConfig([credentialsId: 'stage-kubeconfig']) {
+          echo "Cleaning up the mft namespace"
+          sh 'mft env delete --namespace mft-${MFT_NAMESPACE} || true'
+        }
       }
     }
   }
