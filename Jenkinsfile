@@ -23,7 +23,7 @@ pipeline {
     stage('check_skaffold-deploy') {
       steps {
         withKubeConfig([credentialsId: 'stage-kubeconfig']) {
-          sh 'mft env new --name ${MFT_NAMESPACE} || true'
+          sh 'mft env new --namespace ${MFT_NAMESPACE} || true'
           sh 'mft env switch ${ENV_KUBE_NAMESPACE}'
           sh 'make kube_deploy'
         }
@@ -34,7 +34,7 @@ pipeline {
       steps {
         withKubeConfig([credentialsId: 'stage-kubeconfig']) {
           echo "Cleaning up the mft namespace"
-          sh 'mft env delete --namespace mft-${MFT_NAMESPACE} || true'
+          sh 'mft env delete --namespace ${MFT_NAMESPACE} || true'
         }
       }
     }
