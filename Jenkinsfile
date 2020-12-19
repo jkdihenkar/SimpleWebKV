@@ -8,7 +8,8 @@ pipeline {
   environment {
     VAULT_AUTH_GITHUB_TOKEN = credentials('jenkins-github-token')
     AWS_PROFILE = "stage"
-    MFT_NAMESPACE = "mft-mft-jd001"
+    MFT_NAME = "mft-jd001"
+    ENV_KUBE_NAMESPACE = "mft-mft-jd001"
   }
   stages {
 
@@ -23,7 +24,7 @@ pipeline {
     stage('check_skaffold-deploy') {
       steps {
         withKubeConfig([credentialsId: 'stage-kubeconfig']) {
-          sh 'mft env new --namespace ${MFT_NAMESPACE} || true'
+          sh 'mft env new --name ${MFT_NAME} || true'
           sh 'mft env switch ${ENV_KUBE_NAMESPACE}'
           sh 'make kube_deploy'
         }
@@ -34,7 +35,7 @@ pipeline {
       steps {
         withKubeConfig([credentialsId: 'stage-kubeconfig']) {
           echo "Cleaning up the mft namespace"
-          sh 'mft env delete --namespace ${MFT_NAMESPACE} || true'
+          sh 'mft env delete --name ${MFT_NAME} || true'
         }
       }
     }
