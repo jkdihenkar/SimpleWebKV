@@ -6,4 +6,7 @@ build:
   local:
     push: false
 deploy:
-  kustomize: {}
+  kubectl:
+    manifests:
+      - kubernetes/base/deployment.yaml
+  # Issue with Kustomize - using kubectl manifests.
