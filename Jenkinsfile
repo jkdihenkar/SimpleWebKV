@@ -16,14 +16,12 @@ pipeline {
         echo 'EndPipeline.'
       }
     }
-    stage('check_skaffold-deploy') {4-
-      environment{
-        ENV_KUBE_NAMESPACE = "mft-mft-jd001"
-      }
+    stage('check_skaffold-deploy') {
       steps {
         withKubeConfig([credentialsId: 'stage-kubeconfig']) {
           sh 'make kube_deploy'
         }
+     }
     }
   }
 }
