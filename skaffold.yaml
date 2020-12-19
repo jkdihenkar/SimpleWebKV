@@ -1,0 +1,12 @@
+apiVersion: skaffold/v1beta11
+kind: Config
+build:
+  artifacts:
+    - image: jkdihenkar/simplewebkv
+  local:
+    push: false
+deploy:
+  kubectl:
+    manifests:
+      - kubernetes/base/deployment.yaml
+  # Issue with Kustomize - using kubectl manifests.

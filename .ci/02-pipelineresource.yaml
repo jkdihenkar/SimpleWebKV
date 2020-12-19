@@ -1,0 +1,18 @@
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: jkdihenkar-simplewebkv
+spec:
+  type: git
+  params:
+    - name: url
+      value: https://github.com/jkdihenkar/SimpleWebKV
+    - name: revision
+      value: make_k8s_native
+
+# The git resource type will use git to clone the repo 
+# into the /workspace/$input_name directory everytime 
+# the Task is run. Since our input is named repo the 
+# code will be cloned to /workspace/repo. If our input 
+# would be named foobar it would be cloned 
+# into /workspace/foobar.

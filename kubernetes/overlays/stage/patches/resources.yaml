@@ -1,0 +1,18 @@
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: simplewebkv-stage-patch
+# spec:
+#   minReadySeconds: 10
+#   progressDeadlineSeconds: 600
+#   template:
+#     spec:
+#       containers:
+#         - name: simplewebkv
+#           resources:
+#             requests:
+#               cpu: "100m"
+#               memory: "250Mi"
+#             limits:
+#               cpu: "200m"
+#               memory: "1Gi"

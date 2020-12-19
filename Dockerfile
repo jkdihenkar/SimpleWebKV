@@ -11,5 +11,4 @@ RUN pip install -r requirements.txt
 
 RUN pytest
 
-ENTRYPOINT [ "python" ]
-CMD [ "./simplekv_server.py" ]
+### Please don't add an entrypoint here, instead use params or kubernetes overrides
