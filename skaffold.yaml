@@ -3,5 +3,6 @@ kind: Config
 build:
   artifacts:
     - image: jkdihenkar/simplewebkv
+  local: {}
 deploy:
   kustomize: {}
