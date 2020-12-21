@@ -6,4 +6,4 @@ spec:
   params:
     - name: deploy-namespace
       type: string
-      default: simplewebkv
+      default: jd001

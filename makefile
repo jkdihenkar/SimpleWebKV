@@ -5,13 +5,13 @@ COMPOSE_PROJECT_NAME := $(JOB_NAME)-$(BRANCH_NAME)-$(BUILD_ID)  # to ensure isol
 HOST_UID_GID := $(shell id -u):$(shell id -g)  # To run containers with current user
 
 
-ENV_DOCKER_DOMAIN ?= docker.io
+ENV_DOCKER_DOMAIN ?= registry.grofer.io
 ENV_KUBE_CLUSTER ?= stage
-ENV_KUBE_NAMESPACE ?= mft-mft-jd001
+ENV_KUBE_NAMESPACE ?= jd001
 
 KUBE_APP_NAME := simplewebkv
 
-DOCKER_REPO_NAME := ${ENV_DOCKER_DOMAIN}/jkdihenkar/simplewebkv
+DOCKER_REPO_NAME := ${ENV_DOCKER_DOMAIN}/ci/jkdihenkar/simplewebkv
 
 BRANCH := `git rev-parse --abbrev-ref HEAD`
 COMMIT := `git rev-parse --short=7 HEAD`
@@ -26,12 +26,11 @@ showval:
 
 # assumes docker login
 docker_build:
-	@docker build --rm -t jkdihenkar/simplewebkv:${COMMIT} .
-	@docker build --rm -t jkdihenkar/simplewebkv .
+	@docker build --rm -t ${BRANCH_COMMIT_IMAGE_NAME} -t ${BRANCH_IMAGE_NAME} .
 
 docker_push:
-	@docker push docker.io/jkdihenkar/simplewebkv:${COMMIT}
-	@docker push docker.io/jkdihenkar/simplewebkv:latest
+	@docker push ${BRANCH_COMMIT_IMAGE_NAME}
+	@docker push ${BRANCH_IMAGE_NAME}
 
 check_skaffold:
 	@type skaffold &> /dev/null; if [ $$? -ne 0 ]; then echo "Skaffold binary not found in path, please install skaffold, visit https://skaffold.dev/docs/install/"; exit 2; fi;
