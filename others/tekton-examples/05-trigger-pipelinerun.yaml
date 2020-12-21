@@ -1,10 +1,14 @@
-piVersion: tekton.dev/v1beta1
+apiVersion: tekton.dev/v1beta1
 kind: PipelineRun
 metadata:
   name: simplewebkv-pipeline-run-1
+  namespace: tekton-pipelines
 spec:
   serviceAccountName: tekton-triggers
   pipelineRef:
     name: simplewebkv-ci
-  resources: {}
+  resources:
+    - name: git-simplewebkv-repo
+      resourceRef:
+        name: simplewebkv-repo
 #todo
