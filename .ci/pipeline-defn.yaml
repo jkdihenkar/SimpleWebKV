@@ -1,9 +1,9 @@
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
-  name: release
+  name: stage
 spec:
   params:
     - name: deploy-namespace
       type: string
-      default: simplewebkv
+      default: jd001
