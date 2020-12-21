@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
-  name: stage
+  name: release
 spec:
   params:
     - name: deploy-namespace
