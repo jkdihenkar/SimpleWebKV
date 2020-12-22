@@ -13,7 +13,7 @@ spec:
       value: mft-$(context.pipelineRun.name)
     taskRef:
       name: delete-mft-env
-  - name: set-final-status
+  - name: set-final-status-jd001
     params:
     - name: pipelinerun-name
       value: $(context.pipelineRun.name)
@@ -42,7 +42,7 @@ spec:
     type: pullRequest
   serviceAccountName: tekton-triggers
   tasks:
-  - name: set-pending-status
+  - name: set-pending-status-jd001
     params:
     - name: pipelinerun-name
       value: $(context.pipelineRun.name)
@@ -63,7 +63,7 @@ spec:
     - name: kube-namespace
       value: $(context.pipelineRun.name)
     runAfter:
-    - set-pending-status
+    - set-pending-status-jd001
     taskRef:
       name: create-mft-env
   - name: execute-ci-task
@@ -101,4 +101,4 @@ spec:
   workspaces:
   - name: local-workspace
 
-# kubectl apply -n tekton-pipelines -f ./others/tekton-examples/04-generated_tkn_manifest.yaml 
+# kubectl apply -n tekton-pipelines -f ./others/tekton-examples/04-generated_tkn_manifest.yaml
