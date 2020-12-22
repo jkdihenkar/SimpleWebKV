@@ -1,9 +1,3 @@
-apiVersion: tekton.dev/v1beta1
-kind: Pipeline
-metadata:
-  name: release
-spec:
-  params:
-    - name: deploy-namespace
-      type: string
-      default: jd001
+# TODO - for now refer
+#   - others/tekton-examples/04-generated_tkn_manifest.yaml
+#   - others/tekton-examples/08-task-execute-ci.yaml

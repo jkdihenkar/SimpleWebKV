@@ -4,6 +4,7 @@ apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
   name: simplewebkv-ci
+  namespace: tekton-pipelines
 spec:
   finally:
   - name: delete-mft-env
@@ -101,4 +102,3 @@ spec:
   - name: local-workspace
 
 # kubectl apply -n tekton-pipelines -f ./others/tekton-examples/04-generated_tkn_manifest.yaml 
-

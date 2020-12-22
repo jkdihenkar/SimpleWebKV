@@ -1,0 +1,71 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: execute-ci
+  namespace: tekton-pipelines
+spec:
+  params:
+  - default: $(context.pipelineRun.name)
+    name: kube-namespace
+    type: string
+  resources:
+    inputs:
+    - name: git-source
+      type: git
+    - name: pr
+      type: pullRequest
+  sidecars:
+  - env:
+    - name: DOCKER_AUTH_CONFIG
+      valueFrom:
+        secretKeyRef:
+          key: .dockerconfigjson
+          name: secret-dockercfg
+    image: docker:18.05-dind
+    name: server
+    securityContext:
+      privileged: true
+    volumeMounts:
+    - mountPath: /var/lib/docker
+      name: dind-storage
+    - mountPath: /var/run/
+      name: dind-socket
+  steps:
+  - image: registry.grofer.io/ci/kube-cd:master
+    name: build-and-push-image
+    script: |
+      set -e
+      #!/usr/bin/env bash
+      make docker_build docker_push
+    volumeMounts:
+    - mountPath: /var/run/
+      name: dind-socket
+    workingDir: /workspace/git-source
+  - env:
+    - name: ENV_KUBE_NAMESPACE
+      value: mft-$(params.kube-namespace)
+    - name: KUBECONFIG
+      value: /tmp/stage-ore
+    image: registry.grofer.io/ci/kube-cd:master
+    name: deploy
+    script: |
+      set -e
+      #!/usr/bin/env bash
+      make kube_deploy
+    volumeMounts:
+    - mountPath: /var/run/
+      name: dind-socket
+    - mountPath: /tmp
+      name: kubeconfig
+      readOnly: true
+    workingDir: /workspace/git-source
+  volumes:
+  - emptyDir: {}
+    name: dind-storage
+  - emptyDir: {}
+    name: dind-socket
+  - name: kubeconfig
+    secret:
+      secretName: kubeconfig
+  workspaces:
+  - name: local-workspace

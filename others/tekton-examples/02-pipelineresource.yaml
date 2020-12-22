@@ -1,3 +1,4 @@
+# SAMPLE PIPELINE RESOURCE
 apiVersion: tekton.dev/v1alpha1
 kind: PipelineResource
 metadata:

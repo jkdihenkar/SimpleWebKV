@@ -8,7 +8,7 @@ spec:
   pipelineRef:
     name: simplewebkv-ci
   resources:
-    - name: git-simplewebkv-repo
+    - name: git-source
       resourceRef:
         name: simplewebkv-repo
-#todo
+# TODO: NOT YET WORKING
