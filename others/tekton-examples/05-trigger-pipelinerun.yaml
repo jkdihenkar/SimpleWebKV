@@ -1,14 +1,48 @@
 apiVersion: tekton.dev/v1beta1
 kind: PipelineRun
 metadata:
-  name: simplewebkv-pipeline-run-1
-  namespace: tekton-pipelines
+  name: simplewebkv-ci-2345
 spec:
-  serviceAccountName: tekton-triggers
+  podTemplate:
+    nodeSelector:
+      team: ci
+    tolerations:
+      - key: team
+        operator: Equal
+        value: ci
+        effect: NoSchedule
+  workspaces:
+  - name: local-workspace # this workspace name must be declared in the Pipeline
+    volumeClaimTemplate:  # this leaves a dangling volume of 1 gb for a simple file to store status. emptydir{} will not work between tasks.
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
   pipelineRef:
     name: simplewebkv-ci
+  serviceAccountName: tekton-triggers
   resources:
-    - name: git-source
-      resourceRef:
-        name: simplewebkv-repo
-# TODO: NOT YET WORKING
+  - name: git-source
+    resourceSpec:
+      type: git
+      params:
+      - name: revision
+        value: move-to-tekton
+      - name: url
+        value: https://github.com/jkdihenkar/simplewebkv.git
+  - name: pr
+    resourceSpec:
+      type: pullRequest
+      params:
+        - name: url
+          value: https://github.com/jkdihenkar/simplewebkv/pull/6
+        - name: provider
+          value: github
+      secrets:
+        - fieldName: authToken
+          secretName: github-creds-jd001
+          secretKey: password
+
+# 
