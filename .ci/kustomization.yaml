@@ -1,7 +1,2 @@
-bases:
-    - https://github.com/grofers/kube-cd.git/ci-base?ref=v0.2.0
-
-namePrefix: simplewebkv-
-
-patches:
+resources:
   - pipeline-defn.yaml

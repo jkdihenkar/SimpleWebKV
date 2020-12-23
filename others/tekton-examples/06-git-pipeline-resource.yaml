@@ -1,0 +1,14 @@
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: simplewebkv-repo
+  namespace: tekton-pipelines
+spec:
+  params:
+    - name: url
+      value: 'https://github.com/jkdihenkar/SimpleWebKV.git'
+    - name: revision
+      value: main
+  type: git
+
+# NOT USED.
