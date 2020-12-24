@@ -44,5 +44,3 @@ spec:
         - fieldName: authToken
           secretName: github-creds-jd001
           secretKey: password
-
-# 
