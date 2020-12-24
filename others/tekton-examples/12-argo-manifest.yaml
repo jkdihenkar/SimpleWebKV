@@ -1,0 +1,15 @@
+project: default
+source:
+  repoURL: 'git@github.com:jkdihenkar/simplewebkv.git'
+  path: .ci
+  targetRevision: main
+  directory:
+    recurse: true
+    jsonnet: {}
+destination:
+  server: 'https://kubernetes.default.svc'
+  namespace: mft-jd001
+syncPolicy:
+  automated: {}
+  syncOptions:
+    - CreateNamespace=true
