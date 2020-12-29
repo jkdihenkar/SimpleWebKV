@@ -1,0 +1,72 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: global-checks
+spec:
+  workspaces:
+    - name: local-workspace
+  serviceAccountName: tekton-triggers
+  params:
+    - name: pr_body
+      type: string
+  resources:
+  - name: git-source
+    type: git
+  - name: pr
+    type: pullRequest
+  outputs:
+    resources:
+    - name: pr
+      type: pullRequest
+  tasks:
+  - name: set-pending-status
+    taskRef:
+      name: set-status
+    params:
+    - name: pipelinerun-name
+      value: $(context.pipelineRun.name)
+    - name: pipeline-name
+      value: $(context.pipeline.name)
+    resources:
+      inputs:
+      - name: pr
+        resource: pr
+      outputs:
+      - name: pr
+        resource: pr
+    workspaces:
+    - name: local-workspace
+      workspace: local-workspace
+  - name: run-checks
+    workspaces:
+    - name: local-workspace
+      workspace: local-workspace
+    runAfter: [set-pending-status]
+    taskRef:
+      name: run-checks
+    params:
+      - name: pr_body
+        value: $(params.pr_body)
+    resources:
+      inputs:
+      - name: pr
+        resource: pr
+  finally:
+  - name: set-final-status
+    params:
+    - name: pipelinerun-name
+      value: $(context.pipelineRun.name)
+    - name: pipeline-name
+      value: $(context.pipeline.name)
+    taskRef:
+      name: set-status
+    resources:
+      inputs:
+      - name: pr
+        resource: pr
+      outputs:
+      - name: pr
+        resource: pr
+    workspaces:
+    - name: local-workspace
+      workspace: local-workspace
