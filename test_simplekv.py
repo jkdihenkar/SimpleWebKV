@@ -33,6 +33,9 @@ class TestSimpleKV(unittest.TestCase):
     def test_simplekv_keynotfound(self):
         self.assertFalse(self.simple_kv_store.get('nothello'))
 
+    def test_simplekv_get_oneisone(self):
+        self.assertEqual(1, 1)
+
 
 if __name__ == "__main__":
     unittest.main()
