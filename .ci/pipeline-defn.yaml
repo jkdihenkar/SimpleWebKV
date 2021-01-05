@@ -12,6 +12,7 @@ spec:
       value: mft-$(context.pipelineRun.name)
     taskRef:
       name: delete-mft-env
+      kind: ClusterTask
   - name: set-final-status
     params:
     - name: pipelinerun-name
@@ -27,6 +28,7 @@ spec:
         resource: pr
     taskRef:
       name: set-status
+      kind: ClusterTask
     workspaces:
     - name: local-workspace
       workspace: local-workspace
@@ -54,6 +56,7 @@ spec:
         resource: pr
     taskRef:
       name: set-status
+      kind: ClusterTask
     workspaces:
     - name: local-workspace
       workspace: local-workspace
@@ -65,6 +68,7 @@ spec:
     - set-pending-status
     taskRef:
       name: create-mft-env
+      kind: ClusterTask
   - name: execute-ci-task
     params:
     - name: kube-namespace
@@ -79,6 +83,7 @@ spec:
     - create-mft-env
     taskRef:
       name: execute-ci
+      kind: ClusterTask
     workspaces:
     - name: local-workspace
       workspace: local-workspace
