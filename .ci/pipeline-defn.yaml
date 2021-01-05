@@ -5,6 +5,7 @@ kind: Pipeline
 metadata:
   name: simplewebkv-ci
 spec:
+  serviceAccountName: tekton-triggers
   finally:
   - name: delete-mft-env
     params:
@@ -41,7 +42,6 @@ spec:
     type: git
   - name: pr
     type: pullRequest
-  serviceAccountName: tekton-triggers
   tasks:
   - name: set-pending-status
     params:
