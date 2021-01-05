@@ -12,7 +12,7 @@ spec:
       value: mft-$(context.pipelineRun.name)
     taskRef:
       name: delete-mft-env
-  - name: set-final-status-jd001
+  - name: set-final-status
     params:
     - name: pipelinerun-name
       value: $(context.pipelineRun.name)
@@ -62,7 +62,7 @@ spec:
     - name: kube-namespace
       value: $(context.pipelineRun.name)
     runAfter:
-    - set-pending-status-jd001
+    - set-pending-status
     taskRef:
       name: create-mft-env
   - name: execute-ci-task
