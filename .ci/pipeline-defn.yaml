@@ -5,7 +5,6 @@ kind: Pipeline
 metadata:
   name: simplewebkv-ci
 spec:
-  serviceAccountName: tekton-triggers
   finally:
   - name: delete-mft-env
     params:
