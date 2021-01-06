@@ -86,6 +86,20 @@ spec:
     workspaces:
     - name: local-workspace
       workspace: local-workspace
+  - name: dummyhello
+    runAfter: [execute-ci-task]
+    workspaces:
+      - name: local-workspace
+        workspace: local-workspace
+    taskSpec:
+      workspaces:
+        - name: local-workspace
+      steps:
+        - name: finalize-hello
+          image: 'ubuntu'
+          script: |
+            #!/usr/bin/env bash
+            echo "Say Hello..."
   - name: finalize-pipeline-status
     runAfter:
     - execute-ci-task
