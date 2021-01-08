@@ -18,7 +18,7 @@ spec:
     your Workspace. You can clone into a subdirectory by setting this Task's
     subdirectory param.
   workspaces:
-    - name: output
+    - name: local-workspace
       description: The git repo will be cloned onto the volume backing this workspace
   params:
     - name: url
