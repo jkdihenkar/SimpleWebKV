@@ -4,6 +4,8 @@
 
 resources:
   - pipeline-defn.yaml
+  - git-clone.yaml
+  - git-clone-tests.yaml
 
 # bases:
 #   - ssh://github.com/grofers/kube-cd/ci-base?ref=v0.2.0
