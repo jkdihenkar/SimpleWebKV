@@ -85,7 +85,7 @@ spec:
         if [[ "$(params.verbose)" == "true" ]] ; then
           set -x
         fi
-        CHECKOUT_DIR="$(workspaces.output.path)/$(params.subdirectory)"
+        CHECKOUT_DIR="$(workspaces.local-workspace.path)/$(params.subdirectory)"
         cleandir() {
           # Delete any existing contents of the repo directory if it exists.
           #
