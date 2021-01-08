@@ -4,6 +4,9 @@ apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
   name: simplewebkv-ci
+  labels:
+    tribe: ci-team
+    service: simplewebkv-testbed
 spec:
   finally:
   - name: delete-mft-env
