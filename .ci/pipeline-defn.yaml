@@ -108,8 +108,8 @@ spec:
     runAfter:
       - execute-ci-task
     workspaces:
-      - name: output
-        emptyDir: {}
+      - name: local-workspace
+        workspace: local-workspace
     taskRef:
       name: git-clone
     params:
@@ -119,8 +119,8 @@ spec:
     runAfter:
       - execute-ci-task
     workspaces:
-      - name: output
-        emptyDir: {}
+      - name: local-workspace
+        workspace: local-workspace
     taskRef:
       name: git-clone
     params:
@@ -132,8 +132,8 @@ spec:
     runAfter:
       - execute-ci-task
     workspaces:
-      - name: output
-        emptyDir: {}
+      - name: local-workspace
+        workspace: local-workspace
     taskRef:
       name: git-clone
     params:
@@ -145,8 +145,8 @@ spec:
     runAfter:
       - execute-ci-task
     workspaces:
-      - name: output
-        emptyDir: {}
+      - name: local-workspace
+        workspace: local-workspace
     taskRef:
       name: git-clone
     params:
@@ -158,8 +158,8 @@ spec:
     runAfter:
       - execute-ci-task
     workspaces:
-      - name: output
-        emptyDir: {}
+      - name: local-workspace
+        workspace: local-workspace
     taskRef:
       name: git-clone
     params:
@@ -171,8 +171,8 @@ spec:
     runAfter:
       - execute-ci-task
     workspaces:
-      - name: output
-        emptyDir: {}
+      - name: local-workspace
+        workspace: local-workspace
     taskRef:
       name: git-clone
     params:
@@ -184,8 +184,8 @@ spec:
     runAfter:
       - execute-ci-task
     workspaces:
-      - name: output
-        emptyDir: {}
+      - name: local-workspace
+        workspace: local-workspace
     taskRef:
       name: git-clone
     params:
@@ -197,8 +197,8 @@ spec:
     runAfter:
       - execute-ci-task
     workspaces:
-    - name: output
-      emptyDir: {}
+      - name: local-workspace
+        workspace: local-workspace
     taskRef:
       name: git-clone
     params:
