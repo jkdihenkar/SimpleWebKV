@@ -4,7 +4,6 @@
 
 resources:
   - pipeline-defn.yaml
-  - git-clone.yaml
 #  - git-clone-tests.yaml
 
 # bases:
