@@ -8,6 +8,13 @@ metadata:
     tribe: ci-team
     service: simplewebkv-testbed
 spec:
+  params:
+    - name: gitrevision
+      type: string
+      description: "Commit SHA."
+    - name: gitreponame
+      type: string
+      description: "The GitHub repository name, e.g.: simplewebkv"
   finally:
   - name: delete-mft-env
     params:
@@ -18,20 +25,18 @@ spec:
       kind: ClusterTask
   - name: set-final-status
     params:
-    - name: pipelinerun-name
-      value: $(context.pipelineRun.name)
-    - name: pipeline-name
-      value: $(context.pipeline.name)
-    resources:
-      inputs:
-      - name: pr
-        resource: pr
-      outputs:
-      - name: pr
-        resource: pr
+      - name: pipelinerun-name
+        value: $(context.pipelineRun.name)
+      - name: pipelinerun-namespace
+        value: $(context.pipelineRun.namespace)
+      - name: pipeline-name
+        value: $(context.pipeline.name)
+      - name: SHA
+        value: $(params.gitrevision)
+      - name: REPO_NAME
+        value: $(params.gitreponame)
     taskRef:
-      name: set-status
-      kind: ClusterTask
+      name: set-github-status-v2
     workspaces:
     - name: local-workspace
       workspace: local-workspace
@@ -49,16 +54,16 @@ spec:
     params:
     - name: pipelinerun-name
       value: $(context.pipelineRun.name)
-    resources:
-      inputs:
-      - name: pr
-        resource: pr
-      outputs:
-      - name: pr
-        resource: pr
+    - name: pipelinerun-namespace
+      value: $(context.pipelineRun.namespace)
+    - name: pipeline-name
+      value: $(context.pipeline.name)
+    - name: SHA
+      value: $(params.gitrevision)
+    - name: REPO_NAME
+      value: $(params.gitreponame)
     taskRef:
-      name: set-status
-      kind: ClusterTask
+      name: set-github-status-v2
     workspaces:
     - name: local-workspace
       workspace: local-workspace
