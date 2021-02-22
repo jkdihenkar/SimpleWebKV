@@ -1,2 +1,28 @@
+# namePrefix: simplewebkv-
+# apiVersion: kustomize.config.k8s.io/v1beta1
+# kind: Kustomization
+
 resources:
   - pipeline-defn.yaml
+  - set-github-status-v2.yaml
+
+# bases:
+#   - ssh://github.com/grofers/kube-cd/ci-base?ref=v0.2.0
+
+# patches:
+#   - target:
+#       kind: Pipeline
+#       name: ci
+#     patch: |-
+#       - op: add
+#         path: /spec/tasks/0/taskRef/kind
+#         value: ClusterTask
+#       - op: add
+#         path: /spec/tasks/1/taskRef/kind
+#         value: ClusterTask
+#       - op: add
+#         path: /spec/tasks/2/taskRef/kind
+#         value: ClusterTask
+#       - op: add
+#         path: /spec/finally/0/taskRef/kind
+#         value: ClusterTask

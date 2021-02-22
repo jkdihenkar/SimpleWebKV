@@ -1,5 +1,7 @@
 # SimpleWebKV
 
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+
 A simple web KV Store in Flask with GET SET and WATCH
 
 # Running the Project
@@ -126,3 +128,5 @@ For detailed information on this command, run:
   simplekv_cli_client.py --help
 
 ```
+
+== END OF DOC == 
